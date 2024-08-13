@@ -37,8 +37,8 @@ class Game:
                 if self.player.hitbox.colliderect(i.hitbox):
                     if self.player.hitbox.width > i.hitbox.width:
                         self.enemies.remove(i) 
-                        self.player.hitbox.width =  self.player.hitbox.width + i.size//2 
-                        self.player.hitbox.height =  self.player.hitbox.height + i.size//2 
+                        self.player.hitbox.width =  self.player.hitbox.width + i.size//10
+                        self.player.hitbox.height =  self.player.hitbox.height + i.size//10
                     else: 
                         self.game_over = True
 
