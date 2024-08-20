@@ -3,11 +3,11 @@ from settings import *
 pg.init()
 
 
-class player():
+class Player():
     def __init__(self):
         self.color = player_color
         self.xy = player_xy
-        self.size = player_size
+        self.size = [player_size, player_size]
         self.hitbox = pg.rect.Rect(self.xy, self.size)
         
     def draw(self, screen):

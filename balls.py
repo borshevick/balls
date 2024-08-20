@@ -1,19 +1,37 @@
 import pygame as pg
 import random
+from player import *
 from settings import *
 pg.init()
 
 
-class enemy():
-    def __init__(self):
-        self.xspeed = 5
-        self.yspeed = 5
+class Enemy():
+    def __init__(self, size):
         self.color1 = random.randint(1, 255)
         self.color2 = random.randint(1, 255)
         self.color3 = random.randint(1, 255)
-        self.x = random.randint(1, SCREEN_WIDTH)
-        self.y = random.randint(1, SCREEN_HEIGHT)
-        self.size = random.randint(1, 100)
+        self.s = random.randint(1, 4)
+        if self.s == 1:
+            self.x = random.randint(0, SCREEN_WIDTH)
+            self.y= -100
+            self.xspeed = random.randint(-1, 1)
+            self.yspeed = random.randint(1, 5)
+        if self.s == 2:
+            self.x = SCREEN_WIDTH+100
+            self.y= random.randint(0, SCREEN_HEIGHT)
+            self.xspeed = random.randint(-5, -1)
+            self.yspeed = random.randint(-1, 1)
+        if self.s == 3:
+            self.x = random.randint(0, SCREEN_WIDTH)
+            self.y= SCREEN_HEIGHT+100
+            self.xspeed = random.randint(-1, 1)
+            self.yspeed = random.randint(1, 5)
+        if self.s == 4:
+            self.x = -100
+            self.y= random.randint(0, SCREEN_HEIGHT)
+            self.xspeed = random.randint(1, 5)
+            self.yspeed = random.randint(-1, 1)
+        self.size = size
         self.hitbox = pg.rect.Rect([self.x, self.y], [self.size, self.size])
         
     def draw(self, screen):
@@ -21,32 +39,4 @@ class enemy():
     
     def move(self):
         self.hitbox.x = self.hitbox.x+self.xspeed
-        if self.hitbox.right > SCREEN_WIDTH:
-            self.xspeed = random.randint(-5, -1)
-            self.ballcolor3 = random.randint(0, 255)
-            self.ballcolor2 = random.randint(0, 255)
-            self.ballcolor1 = random.randint(0, 255)
-        if self.hitbox.left <= 0:
-            self.xspeed = random.randint(1, 5)
-            self.ballcolor3 = random.randint(0, 255)
-            self.ballcolor2 = random.randint(0, 255)
-            self.ballcolor1 = random.randint(0, 255)
-            self.hitbox.y = self.hitbox.y+self.yspeed
-        if self.hitbox.top <= 0:
-            self.self.yspeed = random.randint(1, 5)
-            if self.xspeed < 0:
-                self.xspeed = random.randint(-5, -1)
-            else:
-                self.xspeed = random.randint(1, 5)
-            self.ballcolor3 = random.randint(0, 255)
-            self.ballcolor2 = random.randint(0, 255)
-            self.ballcolor1 = random.randint(0, 255)
-        if self.hitbox.bottom >= 600:
-            if self.xspeed > 0:
-                self.xspeed = random.randint(1, 10)
-            else:
-                self.xspeed = random.randint(-10, -1)
-            self.yspeed = random.randint(-10, -1)
-            self.ballcolor3 = random.randint(0, 255)
-            self.ballcolor2 = random.randint(0, 255)
-            self.ballcolor1 = random.randint(0, 255)
+        self.hitbox.y = self.hitbox.y+self.yspeed
